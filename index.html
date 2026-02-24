@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Baby ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(-45deg,#1a1a2e,#16213e,#533483,#e94560);
+    background-size:400% 400%;
+    animation:bgMove 18s ease infinite;
+    overflow-x:hidden;
+    color:white;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* ================= ENVELOPE ================= */
+
+#envelopeScreen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:rgba(0,0,0,0.9);
+    z-index:1000;
+    perspective:1200px;
+    transition:opacity 1.2s ease;
+}
+
+.envelope{
+    position:relative;
+    width:90%;
+    max-width:360px;
+    height:240px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+
+/* Back */
+.envelope-back{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff4d88;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* Bottom fold */
+.envelope-bottom{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:55%;
+    background:#ff66a3;
+    clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);
+}
+
+/* Flap */
+.envelope-flap{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:55%;
+    background:#ff3385;
+    clip-path:polygon(0 100%,50% 40%,100% 100%,100% 0,0 0);
+    transform-origin:top;
+    transition:transform 1.2s ease;
+    z-index:3;
+}
+
+/* Letter */
+.letter{
+    position:absolute;
+    width:85%;
+    height:180px;
+    background:white;
+    left:7.5%;
+    top:40px;
+    border-radius:8px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    transition:transform 1.5s ease;
+    z-index:1;
+}
+
+/* Heart Seal */
+.seal{
+    position:absolute;
+    top:95px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:28px;
+    z-index:4;
+    animation:beat 1.2s infinite;
+}
+
+@keyframes beat{
+    0%,100%{transform:translateX(-50%) scale(1);}
+    50%{transform:translateX(-50%) scale(1.25);}
+}
+
+/* Baby Text */
+.baby-text{
+    position:absolute;
+    width:100%;
+    text-align:center;
+    top:140px;
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(28px,6vw,40px);
+    color:white;
+    text-shadow:0 0 15px #ff99cc;
+    z-index:2;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(-180deg);
+}
+
+.envelope.open .letter{
+    transform:translateY(-170px);
+}
+
+/* Tap Text */
+#tapText{
+    margin-top:30px;
+    font-size:16px;
+    opacity:0.8;
+}
+
+/* ================= MESSAGE ================= */
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:70px 20px 120px 20px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 1.5s ease;
+}
+
+.container.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(36px,8vw,60px);
+    text-align:center;
+    margin-bottom:30px;
+    color:#ffb3d9;
+    text-shadow:0 0 25px #ff66b2;
+}
+
+#typedMessage{
+    font-size:clamp(16px,4vw,20px);
+    line-height:2;
+    white-space:pre-wrap;
+}
+
+#proposal{
+    text-align:center;
+    font-size:clamp(22px,6vw,36px);
+    margin-top:60px;
+    opacity:0;
+    transition:opacity 3s ease;
+    color:#ffd1e6;
+    text-shadow:0 0 30px #ff4da6;
+}
+
+/* Floating hearts */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    color:rgba(255,105,180,0.6);
+    animation:floatUp 9s linear infinite;
+}
+
+@keyframes floatUp{
+    to{transform:translateY(-110vh);opacity:0;}
+}
+
+/* Petals */
+.petal{
+    position:fixed;
+    top:-20px;
+    color:#ff99cc;
+    font-size:18px;
+    animation:fall linear forwards;
+}
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div id="envelopeScreen">
+    <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-bottom"></div>
+        <div class="envelope-flap"></div>
+        <div class="letter"></div>
+        <div class="seal">❤️</div>
+        <div class="baby-text">Baby</div>
+    </div>
+    <div id="tapText">Tap to open my heart 💌</div>
+</div>
+
+<div class="container" id="messageContainer">
+    <h1>Baby,</h1>
+    <div id="typedMessage"></div>
+    <div id="proposal">I choose you. Every single day. ❤️</div>
+</div>
+
+<script>
+const envelopeScreen=document.getElementById("envelopeScreen");
+const envelope=document.getElementById("envelope");
+const container=document.getElementById("messageContainer");
+const typedMessage=document.getElementById("typedMessage");
+const proposal=document.getElementById("proposal");
+
+const message=`Baby,
+
+Loving you is the most natural thing my heart has ever done.
+
+You are my soft place to land,
+my safe arms,
+my brightest smile.
+
+When I think about happiness,
+I think about your laugh.
+When I think about peace,
+I think about your voice.
+When I think about forever,
+I see you standing next to me.
+
+You make ordinary days feel magical.
+You make simple moments unforgettable.
+You make my world complete.
+
+No matter what happens,
+no matter how life changes,
+my heart will always beat for you.
+
+Because you are not just someone I love —
+you are my heart itself. ❤️`;
+
+let index=0;
+
+function typeWriter(){
+    if(index<message.length){
+        typedMessage.innerHTML+=message.charAt(index);
+        index++;
+        window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+        setTimeout(typeWriter,28);
+    }else{
+        setTimeout(()=>proposal.style.opacity="1",1000);
+    }
+}
+
+envelopeScreen.addEventListener("click",()=>{
+    envelope.classList.add("open");
+    setTimeout(()=>{
+        envelopeScreen.style.opacity="0";
+        setTimeout(()=>{
+            envelopeScreen.style.display="none";
+            container.classList.add("show");
+            typeWriter();
+        },1200);
+    },1400);
+});
+
+/* Hearts */
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),9000);
+},900);
+
+/* Petals */
+setInterval(()=>{
+    const petal=document.createElement("div");
+    petal.className="petal";
+    petal.innerHTML="❀";
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(Math.random()*5+5)+"s";
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),10000);
+},800);
+</script>
+
+</body>
+</html>
